@@ -8,3 +8,10 @@ Yleisiä linkkejä:
 ## Työn aihe
 
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
+
+## Suunniteltut sivut
+
+[Etusivu](http://chgr.users.cs.helsinki.fi/tsoha/)
+[Askarelistaus](http://chgr.users.cs.helsinki.fi/tsoha/muistilista)
+[Askaretiedot](http://chgr.users.cs.helsinki.fi/tsoha/askare)
+[Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/muokkaus)

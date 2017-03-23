@@ -1,1 +1,3 @@
--- Lisää DROP TABLE lauseet tähän tiedostoon
+DROP TABLE IF EXISTS Chore CASCADE; -- Muista IF EXISTS ja CASCADE parametrit!
+DROP TABLE IF EXISTS Class CASCADE;
+DROP TABLE IF EXISTS Person CASCADE;

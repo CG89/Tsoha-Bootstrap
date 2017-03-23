@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Käyttäjän Christian Muistilista</h1>
+
+  <p>
+    <a href="#" class="btn btn-success">Lisää askare</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Askare</th>
+        <th>Tärkeysaste</th>
+        <th>Luokka</th>
+        <th>Nosta tärkeyttä</th>
+        <th>Laske tärkeyttä</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <!-- Listataan pelit tähän -->
+      <tr>
+        <td><a href="#">Pese pyykit</a></td>
+        <td>Korkea</td>
+        <td>Pyykki</td>
+        <td><a class="btn btn-default btn-sm" href="#">Nosta</a></td>
+        <td><a class="btn btn-default btn-sm" href="#">Laske</a></td>
+        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

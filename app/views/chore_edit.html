@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa askaretta Pyykit</h1>
+
+  <form>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox">
+        Tärkeä
+      </label>
+    </div>
+    <div class="form-group">
+      <label>Askare</label>
+      <input type="text" class="form-control" value="Pyykit">
+    </div>
+    <div class="form-group">
+      <label>Luokka</label>
+      <input type="text" class="form-control" value="Pyykit">
+    </div>
+    <div class="form-group">
+      <label>Lisätietoja</label>
+      <textarea class="form-control">        Muista sulkea vesihana lopuksi!
+      </textarea>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}
