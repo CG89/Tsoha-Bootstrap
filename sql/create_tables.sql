@@ -11,7 +11,12 @@ CREATE TABLE Class(
 CREATE TABLE Chore(
   id SERIAL PRIMARY KEY,
   person_id INTEGER REFERENCES Person(id), -- Viiteavain Person-tauluun
-  class_name varchar(20) REFERENCES Class(name),
   name varchar(50) NOT NULL,
   urgent boolean DEFAULT FALSE
 );
+
+CREATE TABLE ChoreClass(
+  chore_id INTEGER REFERENCES Chore(id),
+  class_name varchar(20) REFERENCES Class(name)
+);
+  
