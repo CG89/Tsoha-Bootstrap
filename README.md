@@ -9,9 +9,10 @@ Yleisiä linkkejä:
 
 [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
 
-## Staattiset sivut
+## Sivut
 
 * [Etusivu](http://chgr.users.cs.helsinki.fi/tsoha/)
 * [Askarelistaus](http://chgr.users.cs.helsinki.fi/tsoha/muistilista)
-* [Askaretiedot](http://chgr.users.cs.helsinki.fi/tsoha/askare)
+* [Askaretiedot](http://chgr.users.cs.helsinki.fi/tsoha/askare/1)
 * [Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/muokkaus)
+* [Askarelisäys](http://chgr.users.cs.helsinki.fi/tsoha/askare/uusi)
