@@ -9,11 +9,21 @@
   });
   
   $routes->get('/muistilista',function() {
-      HelloWorldController::chore_list();
+//      HelloWorldController::chore_list();
+    ChoreController::index();
   });
+  
+  $routes->post('/askare', function(){
+  ChoreController::store();
+  });
+  
+  $routes->get('/askare/uusi', function(){
+  ChoreController::create();
+});
       
-  $routes->get('/askare',function() {
-  HelloWorldController::chore_show();
+  $routes->get('/askare/:id',function($id) {
+//  HelloWorldController::chore_show();
+    ChoreController::show($id);
   });
   
   $routes->get('/muokkaus',function(){
