@@ -14,7 +14,7 @@ Yleisiä linkkejä:
 * [Etusivu](http://chgr.users.cs.helsinki.fi/tsoha/)
 * [Askarelistaus](http://chgr.users.cs.helsinki.fi/tsoha/muistilista)
 * [Askaretiedot](http://chgr.users.cs.helsinki.fi/tsoha/askare/1)
-* [Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/muokkaus)
+* [Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/askare/1/muokkaus)
 * [Askarelisäys](http://chgr.users.cs.helsinki.fi/tsoha/askare/uusi)
 * [Kirjautuminen](http://chgr.users.cs.helsinki.fi/tsoha/kirjautuminen)
 
