@@ -16,3 +16,9 @@ Yleisiä linkkejä:
 * [Askaretiedot](http://chgr.users.cs.helsinki.fi/tsoha/askare/1)
 * [Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/muokkaus)
 * [Askarelisäys](http://chgr.users.cs.helsinki.fi/tsoha/askare/uusi)
+* [Kirjautuminen](http://chgr.users.cs.helsinki.fi/tsoha/kirjautuminen)
+
+## Käyttäjätunnukset sivulle
+
+* Christian - chgr
+* Henri - Henri123

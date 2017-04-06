@@ -12,10 +12,17 @@ class HelloWorldController extends BaseController {
     public static function sandbox() {
         // Testaa koodiasi täällä
 //        View::make('helloworld.html');
-        $pyykki=Chore::find(1);
-        $chores=Chore::all();
-        Kint::dump($chores);
-        Kint::dump($pyykki);
+//        $pyykki=Chore::find(1);
+//        $chores=Chore::all();
+//        Kint::dump($chores);
+//        Kint::dump($pyykki);
+        $askare=new Chore(array(
+            'name'=>'u',
+            'person_id'=>'2',
+            'urgent'=>'TRUE'
+        ));
+        $errors=$askare->errors();
+        Kint::dump($errors);
     }
 
     public static function chore_list() {

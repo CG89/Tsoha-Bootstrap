@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Käyttäjän Christian Muistilista</h1>
+{% import "macros/forms.html" as forms %}
+<div class="alert alert-success">
+  {{message}}
+</div>
+{% if user_logged_in %}
+<h1>Käyttäjän {{user_logged_in.name}} pelikirjasto</h1>
+{% endif %}
+
+
+ 
 
   <p>
     <a href="{{base_path}}/askare/uusi" class="btn btn-success">Lisää askare</a>
@@ -13,7 +22,7 @@
         <th>Tärkeysaste</th>
 <!--        <th>Nosta tärkeyttä</th>
         <th>Laske tärkeyttä</th>-->
-        <th></th>
+        <th>Poista</th>
       </tr>
     </thead>
 
@@ -30,21 +39,9 @@
                 <label class="label label-success">Normaali
               {% endif %}
           </td>
-          <td><a class="btn btn-default btn-sm" href="{{base_path}}/askare/{{chore.id}}/edit">Muokkaa</a></td>
+          <td>{{forms.poista_nappi("#{base_path}/askare/#{chore.id}/poista")}}</td>
         </tr>
       {% endfor %}
     </tbody>
-    
-<!--    <tbody>
-       Listataan pelit tähän 
-      
-      <tr>
-        <td><a href="#">Pese pyykit</a></td>
-        <td>Korkea</td>
-        <td><a class="btn btn-default btn-sm" href="#">Nosta</a></td>
-        <td><a class="btn btn-default btn-sm" href="#">Laske</a></td>
-        <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a></th>
-      </tr>
-    </tbody>-->
   </table>
 {% endblock %}

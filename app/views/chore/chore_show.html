@@ -1,24 +1,23 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
 <div class="alert alert-success">
   {{message}}
 </div>
 <h1>{{chore.name}}</h1>
-<!-- Painikkeet tähän -->
-<p>
-    <button class="btn btn-danger">Poista</button> <a href="#" class="btn btn-default">Muokkaa</a>
-</p>
-<!-- Tiedot tulee listana tähän -->
 <ul>
     {% if chore.urgent %}
     <li><strong>Tärkeysaste:</strong> Tärkeä</li>
     {%else%}
     <li><strong>Tärkeysaste:</strong> Normaali</li>
     {% endif %}
-<!--    <li><strong>Luokka:</strong> Pyykki</li>-->
 </ul>
-<!-- Kuvaus tulee tähän -->
-<!--<p>
-    Muista sulkea vesihana lopuksi!
-</p>-->
+<!-- Painikkeet tähän -->
+<div>
+          {{forms.poista_nappi("#{base_path}/askare/#{chore.id}/poista")}} <a href="{{base_path}}/askare/{{chore.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
+
+</div>
+<!-- Tiedot tulee listana tähän -->
+
+
 {% endblock %}
