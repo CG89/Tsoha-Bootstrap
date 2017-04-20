@@ -52,3 +52,35 @@ $routes->post('/kirjautuminen', function() {
     // Kirjautumisen käsittely
     PersonController::handle_login();
 });
+
+$routes->post('/uloskirjautuminen', function(){
+  PersonController::logout();
+});
+
+//Luokan reitit.
+$routes->get('/luokat', function(){
+  CategoryController::index();
+});
+$routes->get('/luokka/uusi', function(){
+  CategoryController::create();
+});
+
+$routes->get('/luokka/:id', function($id){
+  CategoryController::show($id);
+});
+
+$routes->post('/luokka', function(){
+  CategoryController::store();
+});
+
+$routes->get('/luokka/:id/muokkaus', function($id){
+  CategoryController::edit($id);
+});
+
+$routes->post('/luokka/:id/muokkaus', function($id){
+  CategoryController::update($id);
+});
+
+$routes->post('/luokka/:id/poista', function($id){
+  CategoryController::destroy($id);
+});

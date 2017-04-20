@@ -17,6 +17,10 @@ Yleisiä linkkejä:
 * [Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/askare/1/muokkaus)
 * [Askarelisäys](http://chgr.users.cs.helsinki.fi/tsoha/askare/uusi)
 * [Kirjautuminen](http://chgr.users.cs.helsinki.fi/tsoha/kirjautuminen)
+* [Luokkalistaus](http://chgr.users.cs.helsinki.fi/tsoha/luokat)
+* [Luokkatiedot](http://chgr.users.cs.helsinki.fi/tsoha/luokka/1)
+* [Luokkamuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/luokka/1/muokkaus)
+* [Luokkalisäys](http://chgr.users.cs.helsinki.fi/tsoha/luokka/uusi)
 
 ## Käyttäjätunnukset sivulle
 

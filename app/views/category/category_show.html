@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% import "macros/forms.html" as forms %}
+<div class="alert alert-success">
+  {{message}}
+</div>
+<h1>{{category.name}}</h1>
+<ul>
+
+</ul>
+<!-- Painikkeet tähän -->
+<div>
+          {{forms.poista_nappi("#{base_path}/luokka/#{category.id}/poista")}} <a href="{{base_path}}/luokka/{{category.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
+
+</div>
+<!-- Tiedot tulee listana tähän -->
+
+
+{% endblock %}

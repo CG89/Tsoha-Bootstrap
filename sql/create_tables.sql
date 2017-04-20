@@ -4,8 +4,10 @@ CREATE TABLE Person(
   password varchar(50) NOT NULL
 );
 
-CREATE TABLE Class(
-  name varchar(20) PRIMARY KEY NOT NULL
+CREATE TABLE Category(
+  id SERIAL PRIMARY KEY,
+  name varchar(20) NOT NULL,
+  person_id Integer
 );
 
 CREATE TABLE Chore(
@@ -15,8 +17,8 @@ CREATE TABLE Chore(
   urgent boolean DEFAULT FALSE
 );
 
-CREATE TABLE ChoreClass(
+CREATE TABLE ChoreCategory(
   chore_id INTEGER REFERENCES Chore(id),
-  class_name varchar(20) REFERENCES Class(name)
+  category_id INTEGER REFERENCES Category(id)
 );
   
