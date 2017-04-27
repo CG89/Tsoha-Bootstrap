@@ -4,7 +4,25 @@
 <div class="alert alert-success">
   {{message}}
 </div>
+
+
+
+
+
+
 <h1>{{chore.name}}</h1>
+<div>
+    
+    <h3>Luokat: 
+    {% for category in categories %}
+    {% for cate in category %}
+    
+    {{cate}}
+    
+    {% endfor %}
+    {% endfor %}
+    </h3>
+</div>
 <ul>
     {% if chore.urgent %}
     <li><strong>Tärkeysaste:</strong> Tärkeä</li>

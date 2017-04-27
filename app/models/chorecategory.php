@@ -45,18 +45,18 @@ class ChoreCategory extends BaseModel {
     }
     
         public static function findCategories($chore_id) {
-        $query = DB::connection()->prepare('SELECT * FROM ChoreCategory LEFT JOIN CategoryWHERE chore_id = :chore_id');
+        $query = DB::connection()->prepare('SELECT Category.name AS name FROM ChoreCategory, Category WHERE  ChoreCategory.chore_id = :chore_id AND ChoreCategory.category_id=Category.id');
         $query->execute(array('chore_id' => $chore_id));
         $rows = $query->fetchALL();
-
+        
         if ($rows) {
-            foreach ($rows as $row){
-            $chorecategories[] = new ChoreCategory(array(
-                'chore_id' => $row['chore_id'],
-                'category_id' => $row['category_id']
-            ));
-            }
-            return $chorecategories;
+//            foreach ($rows as $row){
+//            $chorecategories[] = new Category(array(
+//                'chore_id' => $row['chore_id'],
+//                'category_id' => $row['category_id']
+//            ));
+//            }
+            return $rows;
         }
 
         return null;

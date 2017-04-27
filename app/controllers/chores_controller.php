@@ -14,7 +14,8 @@ class ChoreController extends BaseController {
     public static function show($id) {
         self::check_logged_in();
         $chore = Chore::find($id);
-        View::make('chore/chore_show.html', array('chore' => $chore));
+        $categories= ChoreCategory::findCategories($id);
+        View::make('chore/chore_show.html', array('chore' => $chore, 'categories' => $categories));
     }
     //Kutsuu näkymää, joka mahdollistaa uuden askareen tallentamisen tietokantaan.
     public static function create() {
