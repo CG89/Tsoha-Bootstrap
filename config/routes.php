@@ -1,4 +1,5 @@
 <?php
+require 'app/models/chore.php';
 
 $routes->get('/', function() {
     HelloWorldController::index();
@@ -6,6 +7,8 @@ $routes->get('/', function() {
 
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
+    $choreswithcategories=Chore::allWithCategories(1);
+    Kint::dump($choreswithcategories);
 });
 
 $routes->get('/muistilista', function() {

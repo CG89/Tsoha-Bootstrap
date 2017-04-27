@@ -2,48 +2,55 @@
 {% block content %}
 {% import "macros/forms.html" as forms %}
 <div class="alert alert-success">
-  {{message}}
+    {{message}}
 </div>
 {% if user_logged_in %}
 <h1>Käyttäjän {{user_logged_in.name}} muistilista</h1>
 {% endif %}
 
 
- 
 
-  <p>
+
+<p>
     <a href="{{base_path}}/askare/uusi" class="btn btn-success">Lisää askare</a>
-  
-    <a href="{{base_path}}/luokat" class="btn btn-default">Hallinnoi luokkia</a>
-  </p>
 
-  <table class="table table-striped table-bordered">
+    <a href="{{base_path}}/luokat" class="btn btn-default">Hallinnoi luokkia</a>
+</p>
+
+<table class="table table-striped table-bordered">
     <thead>
-      <tr>
-        <th>Askare</th>
-        <th>Tärkeysaste</th>
-<!--        <th>Nosta tärkeyttä</th>
-        <th>Laske tärkeyttä</th>-->
-        <th>Poista</th>
-      </tr>
+        <tr>
+            <th>Askare</th>
+            <th>Luokat</th>
+            <th>Tärkeysaste</th>
+            <th>Poista</th>
+        </tr>
     </thead>
 
     <tbody>
-      {% for chore in chores %}
+        {% for chore in chores %}
+
+
         <tr>
-          <td><a href="{{base_path}}/askare/{{chore.id}}">{{chore.name}}</td>
-<!--          <td>{{game.published}}</td>
-          <td>{{game.publisher}}</td>-->
-          <td>
-              {% if chore.urgent %}
+            <td><a href="{{base_path}}/askare/{{chore.id}}">{{chore.name}}</td>
+            <td> {% for category in chore.categories %}
+                {% for cat in category %}
+                <text>{{cat}},  </text>
+                {% endfor %}   
+                {% endfor %}
+            </td>
+
+            <td>
+                {% if chore.urgent %}
                 <label class="label label-danger">Tärkeä
-              {% else %}
-                <label class="label label-success">Normaali
-              {% endif %}
-          </td>
-          <td>{{forms.poista_nappi("#{base_path}/askare/#{chore.id}/poista")}}</td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
+                    {% else %}
+                    <label class="label label-success">Normaali
+                        {% endif %}
+                        </td>
+                        <td>{{forms.poista_nappi("#{base_path}/askare/#{chore.id}/poista")}}</td>
+                        </tr>
+
+                        {% endfor %}
+                        </tbody>
+                        </table>
+                        {% endblock %}

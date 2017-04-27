@@ -5,7 +5,8 @@ class ChoreController extends BaseController {
     //Kutsuu näkymän, joka näyttää kirjautuneen käyttäjän muistilistan sisällön.
     public static function index() {
         self::check_logged_in();
-        $chores = Chore::all(self::get_user_logged_in()->id);
+        $chores = Chore::allWithCategories(self::get_user_logged_in()->id);
+        
         View::make('chore/chore_list.html', array('chores' => $chores));
     }
 
@@ -18,7 +19,8 @@ class ChoreController extends BaseController {
     //Kutsuu näkymää, joka mahdollistaa uuden askareen tallentamisen tietokantaan.
     public static function create() {
         self::check_logged_in();
-        View::make('chore/new.html');
+        $categories= Category::all(self::get_user_logged_in()->id);
+        View::make('chore/new.html', array('categories' => $categories));
     }
     //Tarkistaa POST-pyynnön muuttujien validiteetin ja joko kutsuu Chore-luokan save-metodia ja ohjaa askareen esittelysivulle
     //tai jos virheitä löytyy, kutsuu uuden askareen luonti-näkymän ja antaa sille virheilmoitukset.
@@ -26,13 +28,22 @@ class ChoreController extends BaseController {
         self::check_logged_in();
         // POST-pyynnön muuttujat sijaitsevat $_POST nimisessä assosiaatiolistassa
         $params = $_POST;
+        
+       $categories=$params['categories'];
+        
 
         // Alustetaan uusi Chore-luokan olion käyttäjän syöttämillä arvoilla
         $attributes = array(
             'name' => $params['name'],
             'person_id' => $params['person_id'],
             'urgent' => $params['urgent'],
+            'categories' => array()
         );
+        $key='category';
+        foreach ($categories as $key =>$category) {
+            if($category!=0){
+            $attributes['categories'][]=$category;
+        }}
         $chore = new Chore($attributes);
         $errors = $chore->errors();
         if (count($errors) == 0) {
@@ -42,7 +53,7 @@ class ChoreController extends BaseController {
 
             // Kutsutaan alustamamme olion save metodia, joka tallentaa olion tietokantaan
             // Ohjataan käyttäjä lisäyksen jälkeen pelin esittelysivulle
-            Redirect::to('/askare/' . $chore->id, array('message' => 'Askare on lisätty muistilistaasi!'));
+            Redirect::to('/muistilista', array('message' => 'Askare on lisätty muistilistaasi!'));
         } else {
             //askareessa oli jotain vikaa
             View::make('chore/new.html', array('errors' => $errors, 'attributes' => $attributes));

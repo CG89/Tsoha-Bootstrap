@@ -1,40 +1,50 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää askare muistilistaasi</h1>
-  
-  {% if errors %}
-  <div class="alert alert-danger">
-      <ul>
-          {% for error in errors %}
-          <li>{{error}}</li>
-          {% endfor %}
-      </ul>
-  </div>
-  {% endif %}
+<h1>Lisää askare muistilistaasi</h1>
 
-  <form method="post" action="{{base_path}}/askare">
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/askare">
     <div class="form-group">
-      <label class="control-label">Askare</label>
-      <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+        <label class="control-label">Askare</label>
+        <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+    </div>
+
+
+    <input type="hidden" name="categories['category']" value=0>
+
+
+    <div class="form-group">
+        <label>Luokat (Ctrl-painettuna useampi)</label>
+        <select class="form-control" name="categories['category']" multiple="">
+            {% for category in categories %}
+            <option value="{{category.id}}">{{category.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+
+
+    <div class="form-group">
+        <input type="hidden" name="person_id" value={{user_logged_in.id}}>
     </div>
 
     <div class="form-group">
-      <input type="hidden" name="person_id" value={{user_logged_in.id}}>
+        <input type="hidden" name ="urgent" value =FALSE> 
+        <input type="checkbox" name="urgent" value=TRUE > Tärkeä?
+
     </div>
 
     <div class="form-group">
-       <input type="hidden" name ="urgent" value =FALSE> 
-      <input type="checkbox" name="urgent" value=TRUE > Tärkeä?
-      
+        <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
-
-<!--    <div class="form-group">
-      <label>Kuvaus</label>
-      <textarea name="description" class="form-control"></textarea>
-    </div>-->
-
-    <div class="form-group">
-      <button type="submit" class="btn btn-primary">Lisää</button>
-    </div>
-  </form>
+</form>
 {% endblock %}

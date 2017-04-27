@@ -6,8 +6,9 @@ CREATE TABLE Person(
 
 CREATE TABLE Category(
   id SERIAL PRIMARY KEY,
-  name varchar(20) NOT NULL,
-  person_id Integer
+  person_id INTEGER REFERENCES Person(id),
+  name varchar(20) NOT NULL
+  
 );
 
 CREATE TABLE Chore(

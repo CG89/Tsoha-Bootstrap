@@ -2,7 +2,7 @@
 
 class Chore extends BaseModel {
 
-    public $id, $person_id, $name, $urgent;
+    public $id, $person_id, $name, $urgent, $categories;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -11,7 +11,7 @@ class Chore extends BaseModel {
 
     public static function all($person_id) {
         $query = DB::connection()->prepare('SELECT * FROM Chore WHERE person_id=:person_id');
-        $query->execute(array('person_id'=> $person_id));
+        $query->execute(array('person_id' => $person_id));
         $rows = $query->fetchAll();
         $chores = array();
         foreach ($rows as $row) {
@@ -44,6 +44,34 @@ class Chore extends BaseModel {
         return null;
     }
 
+    public static function allWithCategories($person_id) {
+        
+        $query = DB::connection()->prepare('SELECT * FROM Chore WHERE person_id=:person_id');
+        $query->execute(array('person_id' => $person_id));
+        $rows = $query->fetchAll();
+        $chores = array();
+        
+        foreach ($rows as $row) {
+            $query = DB::connection()->prepare('SELECT Category.name AS category FROM Chore, ChoreCategory, Category'
+                    . ' WHERE Chore.id=:chore_id AND Chore.id=ChoreCategory.chore_id AND ChoreCategory.category_id=Category.id');
+            $query->execute(array('chore_id' => $row['id']));
+            $categories = array();
+            $categories = $query->fetchAll();
+            
+            $chores[] = new Chore(array(
+            'id' => $row['id'],
+            'person_id' => $row['person_id'],
+            'name' => $row['name'],
+            'urgent' => $row['urgent'],
+            'categories' => $categories
+            ));
+        }
+        
+//        $query = DB::connection()->prepare('SELECT * FROM Category WHERE person_id=:person_id');
+//        $query->execute(array('person_id' => $person_id));
+        return $chores;
+    }
+
     public function save() {
         // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
         $query = DB::connection()->prepare('INSERT INTO Chore (name, person_id, urgent) VALUES (:name, :person_id, :urgent) RETURNING id');
@@ -53,23 +81,39 @@ class Chore extends BaseModel {
         $row = $query->fetch();
         // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
         $this->id = $row['id'];
-    }
+        
+        foreach ($this->categories as $category) {
+            if($category!=0){
+                $attributes = array(
+                    'chore_id' => $this->id,
+                    'category_id' => $category
+                        );
+                $chorecategory = new ChoreCategory($attributes);
+                $chorecategory->save();
+        }}
+        }
     
-    public function update(){
+
+    public function update() {
         $query = DB::connection()->prepare('UPDATE Chore SET name=:name, person_id=:person_id, urgent=:urgent WHERE id=:id');
-        $query->execute(array('name' => $this->name, 'person_id' => $this->person_id, 'urgent' => $this->urgent, 'id'=>$this->id));
+        $query->execute(array('name' => $this->name, 'person_id' => $this->person_id, 'urgent' => $this->urgent, 'id' => $this->id));
 //        $row = $query->fetch();
 //        $this->id = $row['id'];
-        
     }
-    public function destroy(){
+
+    public function destroy() {
+        $attributes= array(
+            'chore_id'=>$this->id,
+            'category_id'=>0
+        );
+        $chorecategory= new ChoreCategory($attributes);
+        $chorecategory->destroy();
         $query = DB::connection()->prepare('DELETE FROM Chore WHERE id=:id');
-        $query->execute(array('id'=>$this->id));
+        $query->execute(array('id' => $this->id));
+        
 //        $row = $query->fetch();
 //        $this->id = $row['id'];
-        
     }
-    
 
     public function validate_name() {
         $errors = array();
@@ -79,8 +123,8 @@ class Chore extends BaseModel {
         if (strlen($this->name) < 2) {
             $errors[] = 'Askareen pituuden tulee olla vähintää kaksi merkkiä!';
         }
-        if (strlen($this->name)>50){
-            $errors[]='Askare saa olla enintää 50 merkkiä pitkä!';
+        if (strlen($this->name) > 50) {
+            $errors[] = 'Askare saa olla enintää 50 merkkiä pitkä!';
         }
         return $errors;
     }
