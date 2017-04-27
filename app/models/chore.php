@@ -46,7 +46,7 @@ class Chore extends BaseModel {
 
     public static function allWithCategories($person_id) {
         
-        $query = DB::connection()->prepare('SELECT * FROM Chore WHERE person_id=:person_id');
+        $query = DB::connection()->prepare('SELECT * FROM Chore WHERE person_id=:person_id ORDER BY urgent DESC, id ASC');
         $query->execute(array('person_id' => $person_id));
         $rows = $query->fetchAll();
         $chores = array();

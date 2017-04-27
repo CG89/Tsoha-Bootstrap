@@ -39,9 +39,9 @@ class ChoreController extends BaseController {
             'urgent' => $params['urgent'],
             'categories' => array()
         );
-        $key='category';
-        foreach ($categories as $key =>$category) {
-            if($category!=0){
+        if($categories!=0){
+        foreach ($categories as $category) {
+            
             $attributes['categories'][]=$category;
         }}
         $chore = new Chore($attributes);

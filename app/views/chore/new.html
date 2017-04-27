@@ -19,12 +19,12 @@
     </div>
 
 
-    <input type="hidden" name="categories['category']" value=0>
+    <input type="hidden" name="categories" value=0>
 
 
     <div class="form-group">
         <label>Luokat (Ctrl-painettuna useampi)</label>
-        <select class="form-control" name="categories['category']" multiple="">
+        <select class="form-control" name="categories[]" multiple="">
             {% for category in categories %}
             <option value="{{category.id}}">{{category.name}}</option>
             {% endfor %}
