@@ -12,11 +12,11 @@ Yleisiä linkkejä:
 ## Sivut
 
 * [Etusivu](http://chgr.users.cs.helsinki.fi/tsoha/)
+* [Kirjautuminen](http://chgr.users.cs.helsinki.fi/tsoha/kirjautuminen)
 * [Askarelistaus](http://chgr.users.cs.helsinki.fi/tsoha/muistilista)
 * [Askaretiedot](http://chgr.users.cs.helsinki.fi/tsoha/askare/1)
 * [Askaremuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/askare/1/muokkaus)
 * [Askarelisäys](http://chgr.users.cs.helsinki.fi/tsoha/askare/uusi)
-* [Kirjautuminen](http://chgr.users.cs.helsinki.fi/tsoha/kirjautuminen)
 * [Luokkalistaus](http://chgr.users.cs.helsinki.fi/tsoha/luokat)
 * [Luokkatiedot](http://chgr.users.cs.helsinki.fi/tsoha/luokka/1)
 * [Luokkamuokkaus](http://chgr.users.cs.helsinki.fi/tsoha/luokka/1/muokkaus)
