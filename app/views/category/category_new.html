@@ -1,29 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää uusi luokka käytettäviin luokkiin</h1>
-  
-  {% if errors %}
-  <div class="alert alert-danger">
-      <ul>
-          {% for error in errors %}
-          <li>{{error}}</li>
-          {% endfor %}
-      </ul>
-  </div>
-  {% endif %}
+<h1>Lisää uusi luokka käytettäviin luokkiin</h1>
 
-  <form method="post" action="{{base_path}}/luokka">
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/luokka">
     <div class="form-group">
-      <label class="control-label">Luokka</label>
-      <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+        <label class="control-label">Luokka</label>
+        <input type="text" name="name" class="form-control" value="{{attributes.name}}">
     </div>
 
     <div class="form-group">
-      <input type="hidden" name="person_id" value={{user_logged_in.id}}>
+        <input type="hidden" name="person_id" value={{user_logged_in.id}}>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Lisää</button>
+        <button type="submit" class="btn btn-primary">Lisää</button>
     </div>
-  </form>
+</form>
 {% endblock %}

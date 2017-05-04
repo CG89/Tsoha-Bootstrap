@@ -1,4 +1,5 @@
 <?php
+
 require 'app/models/chore.php';
 
 $routes->get('/', function() {
@@ -7,7 +8,7 @@ $routes->get('/', function() {
 
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
-    $choreswithcategories=Chore::allWithCategories(1);
+    $choreswithcategories = Chore::allWithCategories(1);
     Kint::dump($choreswithcategories);
 });
 
@@ -56,34 +57,34 @@ $routes->post('/kirjautuminen', function() {
     PersonController::handle_login();
 });
 
-$routes->post('/uloskirjautuminen', function(){
-  PersonController::logout();
+$routes->post('/uloskirjautuminen', function() {
+    PersonController::logout();
 });
 
 //Luokan reitit.
-$routes->get('/luokat', function(){
-  CategoryController::index();
+$routes->get('/luokat', function() {
+    CategoryController::index();
 });
-$routes->get('/luokka/uusi', function(){
-  CategoryController::create();
-});
-
-$routes->get('/luokka/:id', function($id){
-  CategoryController::show($id);
+$routes->get('/luokka/uusi', function() {
+    CategoryController::create();
 });
 
-$routes->post('/luokka', function(){
-  CategoryController::store();
+$routes->get('/luokka/:id', function($id) {
+    CategoryController::show($id);
 });
 
-$routes->get('/luokka/:id/muokkaus', function($id){
-  CategoryController::edit($id);
+$routes->post('/luokka', function() {
+    CategoryController::store();
 });
 
-$routes->post('/luokka/:id/muokkaus', function($id){
-  CategoryController::update($id);
+$routes->get('/luokka/:id/muokkaus', function($id) {
+    CategoryController::edit($id);
 });
 
-$routes->post('/luokka/:id/poista', function($id){
-  CategoryController::destroy($id);
+$routes->post('/luokka/:id/muokkaus', function($id) {
+    CategoryController::update($id);
+});
+
+$routes->post('/luokka/:id/poista', function($id) {
+    CategoryController::destroy($id);
 });

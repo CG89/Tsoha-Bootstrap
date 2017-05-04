@@ -47,12 +47,6 @@ class ChoreCategory extends BaseModel {
         $rows = $query->fetchALL();
 
         if ($rows) {
-//            foreach ($rows as $row){
-//            $chorecategories[] = new Category(array(
-//                'chore_id' => $row['chore_id'],
-//                'category_id' => $row['category_id']
-//            ));
-//            }
             return $rows;
         }
 
@@ -65,8 +59,6 @@ class ChoreCategory extends BaseModel {
 
 
                 $query = DB::connection()->prepare('INSERT INTO ChoreCategory (chore_id, category_id) VALUES (:chore_id, :category_id)');
-                // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
-
                 $query->execute(array('chore_id' => $this->chore_id, 'category_id' => $category_id));
             }
         } else {
@@ -75,30 +67,14 @@ class ChoreCategory extends BaseModel {
         }
     }
 
-
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM ChoreCategory WHERE chore_id=:chore_id');
         $query->execute(array('chore_id' => $this->chore_id));
-
     }
-    
-        public function destroyCategory() {
+
+    public function destroyCategory() {
         $query = DB::connection()->prepare('DELETE FROM ChoreCategory WHERE category_id=:category_id');
         $query->execute(array('category_id' => $this->category_id));
-
     }
 
-//    public function validate_name() {
-//        $errors = array();
-//        if ($this->name == '' || $this->name == null) {
-//            $errors[] = 'Askare-kenttä ei saa olla tyhjä!';
-//        }
-//        if (strlen($this->name) < 2) {
-//            $errors[] = 'Askareen pituuden tulee olla vähintää kaksi merkkiä!';
-//        }
-//        if (strlen($this->name) > 50) {
-//            $errors[] = 'Askare saa olla enintää 50 merkkiä pitkä!';
-//        }
-//        return $errors;
-//    }
 }

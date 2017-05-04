@@ -11,27 +11,27 @@
 {% endif %}
 
 
- 
 
-  <p>
+
+<p>
     <a href="{{base_path}}/luokka/uusi" class="btn btn-success">Lisää luokka</a>
-  </p>
+</p>
 
-  <table class="table table-striped table-bordered">
+<table class="table table-striped table-bordered">
     <thead>
-      <tr>
-        <th>Luokka</th>
-        <th>Poista</th>
-      </tr>
+        <tr>
+            <th>Luokka</th>
+            <th>Poista</th>
+        </tr>
     </thead>
 
     <tbody>
-      {% for category in categories %}
+        {% for category in categories %}
         <tr>
-          <td><a href="{{base_path}}/luokka/{{category.id}}">{{category.name}}</td>
-          <td>{{forms.poista_nappi("#{base_path}/luokka/#{category.id}/poista")}}</td>
+            <td><a href="{{base_path}}/luokka/{{category.id}}">{{category.name}}</td>
+            <td>{{forms.poista_nappi("#{base_path}/luokka/#{category.id}/poista")}}</td>
         </tr>
-      {% endfor %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 {% endblock %}

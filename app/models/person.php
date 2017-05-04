@@ -44,7 +44,7 @@ class Person extends BaseModel {
 
     public static function authenticate($name, $password) {
         $query = DB::connection()->prepare('SELECT * FROM Person WHERE name=:name AND password=:password LIMIT 1');
-        $query->execute(array('name'=>$name,'password'=>$password));
+        $query->execute(array('name' => $name, 'password' => $password));
         $row = $query->fetch();
 
         if ($row) {
@@ -59,8 +59,8 @@ class Person extends BaseModel {
 
         return null;
     }
-    
-        public function validate_name() {
+
+    public function validate_name() {
         $errors = array();
         if ($this->name == '' || $this->name == null) {
             $errors[] = 'Käyttäjätunnus-kenttä ei saa olla tyhjä!';
@@ -68,8 +68,8 @@ class Person extends BaseModel {
         if (strlen($this->name) < 3) {
             $errors[] = 'Käyttäjätunnuksen pituuden tulee olla vähintää kolme merkkiä!';
         }
-        if (strlen($this->name)>50){
-            $errors[]='käyttäjätunnus saa olla enintää 50 merkkiä pitkä!';
+        if (strlen($this->name) > 50) {
+            $errors[] = 'käyttäjätunnus saa olla enintää 50 merkkiä pitkä!';
         }
         return $errors;
     }
