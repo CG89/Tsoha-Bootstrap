@@ -45,30 +45,27 @@ class Chore extends BaseModel {
     }
 
     public static function allWithCategories($person_id) {
-        
+
         $query = DB::connection()->prepare('SELECT * FROM Chore WHERE person_id=:person_id ORDER BY urgent DESC, id ASC');
         $query->execute(array('person_id' => $person_id));
         $rows = $query->fetchAll();
         $chores = array();
-        
+
         foreach ($rows as $row) {
             $query = DB::connection()->prepare('SELECT Category.name AS category FROM Chore, ChoreCategory, Category'
                     . ' WHERE Chore.id=:chore_id AND Chore.id=ChoreCategory.chore_id AND ChoreCategory.category_id=Category.id');
             $query->execute(array('chore_id' => $row['id']));
             $categories = array();
             $categories = $query->fetchAll();
-            
+
             $chores[] = new Chore(array(
-            'id' => $row['id'],
-            'person_id' => $row['person_id'],
-            'name' => $row['name'],
-            'urgent' => $row['urgent'],
-            'categories' => $categories
+                'id' => $row['id'],
+                'person_id' => $row['person_id'],
+                'name' => $row['name'],
+                'urgent' => $row['urgent'],
+                'categories' => $categories
             ));
         }
-        
-//        $query = DB::connection()->prepare('SELECT * FROM Category WHERE person_id=:person_id');
-//        $query->execute(array('person_id' => $person_id));
         return $chores;
     }
 
@@ -81,36 +78,52 @@ class Chore extends BaseModel {
         $row = $query->fetch();
         // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
         $this->id = $row['id'];
-        
+
         foreach ($this->categories as $category) {
-            if($category!=0){
-                $attributes = array(
+            if ($category != 0) {
+                $attributes2 = array(
                     'chore_id' => $this->id,
                     'category_id' => $category
-                        );
-                $chorecategory = new ChoreCategory($attributes);
+                );
+                $chorecategory = new ChoreCategory($attributes2);
                 $chorecategory->save();
-        }}
+            }
         }
-    
+    }
 
     public function update() {
         $query = DB::connection()->prepare('UPDATE Chore SET name=:name, person_id=:person_id, urgent=:urgent WHERE id=:id');
         $query->execute(array('name' => $this->name, 'person_id' => $this->person_id, 'urgent' => $this->urgent, 'id' => $this->id));
-//        $row = $query->fetch();
-//        $this->id = $row['id'];
+        $attributes = array(
+            'chore_id' => $this->id,
+            'category_id' => 0
+        );
+        $chorecategorydestroy = new ChoreCategory($attributes);
+
+        $chorecategorydestroy->destroy();
+        foreach ($this->categories as $category) {
+            if ($category != 0) {
+                $attributes2 = array(
+                    'chore_id' => $this->id,
+                    'category_id' => $category
+                );
+                $chorecategory = new ChoreCategory($attributes2);
+
+                $chorecategory->save();
+            }
+        }
     }
 
     public function destroy() {
-        $attributes= array(
-            'chore_id'=>$this->id,
-            'category_id'=>0
+        $attributes = array(
+            'chore_id' => $this->id,
+            'category_id' => 0
         );
-        $chorecategory= new ChoreCategory($attributes);
+        $chorecategory = new ChoreCategory($attributes);
         $chorecategory->destroy();
         $query = DB::connection()->prepare('DELETE FROM Chore WHERE id=:id');
         $query->execute(array('id' => $this->id));
-        
+
 //        $row = $query->fetch();
 //        $this->id = $row['id'];
     }

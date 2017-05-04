@@ -1,10 +1,12 @@
 <?php
 
 class PersonController extends BaseController {
+
     //Kutsuu sisäänkirjautumisnäkymän.
     public static function login() {
         View::make('person/login.html');
     }
+
     //Käsittelee sisäänkirjautumisen ja aloittaa session ja ohjaa käyttäjän muistilistaansa tai palauttaa virheilmoituksen.
     public static function handle_login() {
         $params = $_POST;
@@ -19,6 +21,7 @@ class PersonController extends BaseController {
             Redirect::to('/muistilista', array('message' => 'Tervetuloa takaisin ' . $person->name . '!'));
         }
     }
+
     //Päättää session ja ohjaa kirjautumisnäkymään.
     public static function logout() {
         $_SESSION['person'] = null;

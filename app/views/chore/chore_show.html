@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 {% import "macros/forms.html" as forms %}
+{% if message %}
 <div class="alert alert-success">
-  {{message}}
+    {{message}}
 </div>
-
+{% endif %}
 
 
 
@@ -12,15 +13,15 @@
 
 <h1>{{chore.name}}</h1>
 <div>
-    
+
     <h3>Luokat: 
-    {% for category in categories %}
-    {% for cate in category %}
-    
-    {{cate}}
-    
-    {% endfor %}
-    {% endfor %}
+        {% for category in categories %}
+        {% for cate in category %}
+
+        {{cate}}
+
+        {% endfor %}
+        {% endfor %}
     </h3>
 </div>
 <ul>
@@ -32,7 +33,7 @@
 </ul>
 <!-- Painikkeet tähän -->
 <div>
-          {{forms.poista_nappi("#{base_path}/askare/#{chore.id}/poista")}} <a href="{{base_path}}/askare/{{chore.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
+    {{forms.poista_nappi("#{base_path}/askare/#{chore.id}/poista")}} <a href="{{base_path}}/askare/{{chore.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
 
 </div>
 <!-- Tiedot tulee listana tähän -->

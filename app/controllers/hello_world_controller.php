@@ -1,7 +1,5 @@
 <?php
 
-
-
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -16,12 +14,12 @@ class HelloWorldController extends BaseController {
 //        $chores=Chore::all();
 //        Kint::dump($chores);
 //        Kint::dump($pyykki);
-        $askare=new Chore(array(
-            'name'=>'u',
-            'person_id'=>'2',
-            'urgent'=>'TRUE'
+        $askare = new Chore(array(
+            'name' => 'u',
+            'person_id' => '2',
+            'urgent' => 'TRUE'
         ));
-        $errors=$askare->errors();
+        $errors = $askare->errors();
         Kint::dump($errors);
     }
 

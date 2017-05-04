@@ -49,6 +49,7 @@ class CategoryController extends BaseController {
             View::make('category/category_new.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
+
     //Kutsuu luokan muokkausnäkymää ja antaa sille luokan tiedot.
     public static function edit($id) {
         self::check_logged_in();

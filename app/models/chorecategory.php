@@ -18,13 +18,10 @@ class ChoreCategory extends BaseModel {
             $chorecategories[] = new ChoreCategory(array(
                 'chore_id' => $row['chore_id'],
                 'category_id' => $row['category_id']
-                
             ));
         }
         return $chorecategories;
     }
-    
-
 
     public static function find($chore_id) {
         $query = DB::connection()->prepare('SELECT * FROM ChoreCategory WHERE chore_id = :chore_id');
@@ -32,23 +29,23 @@ class ChoreCategory extends BaseModel {
         $rows = $query->fetchALL();
 
         if ($rows) {
-            foreach ($rows as $row){
-            $chorecategories[] = new ChoreCategory(array(
-                'chore_id' => $row['chore_id'],
-                'category_id' => $row['category_id']
-            ));
+            foreach ($rows as $row) {
+                $chorecategories[] = new ChoreCategory(array(
+                    'chore_id' => $row['chore_id'],
+                    'category_id' => $row['category_id']
+                ));
             }
             return $chorecategories;
         }
 
         return null;
     }
-    
-        public static function findCategories($chore_id) {
+
+    public static function findCategories($chore_id) {
         $query = DB::connection()->prepare('SELECT Category.name AS name FROM ChoreCategory, Category WHERE  ChoreCategory.chore_id = :chore_id AND ChoreCategory.category_id=Category.id');
         $query->execute(array('chore_id' => $chore_id));
         $rows = $query->fetchALL();
-        
+
         if ($rows) {
 //            foreach ($rows as $row){
 //            $chorecategories[] = new Category(array(
@@ -63,28 +60,32 @@ class ChoreCategory extends BaseModel {
     }
 
     public function save() {
-        // Lisätään RETURNING id tietokantakyselymme loppuun, niin saamme lisätyn rivin id-sarakkeen arvon
-        $query = DB::connection()->prepare('INSERT INTO ChoreCategory (chore_id, category_id) VALUES (:chore_id, :category_id)');
-        // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
-        $query->execute(array('chore_id' => $this->chore_id, 'category_id' => $this->category_id));
-        // Haetaan kyselyn tuottama rivi, joka sisältää lisätyn rivin id-sarakkeen arvon
-//        $row = $query->fetch();
-//        // Asetetaan lisätyn rivin id-sarakkeen arvo oliomme id-attribuutin arvoksi
-//        $this->id = $row['id'];
+        if (is_array($this->category_id)) {
+            foreach ($this->category_id as $category_id) {
+
+
+                $query = DB::connection()->prepare('INSERT INTO ChoreCategory (chore_id, category_id) VALUES (:chore_id, :category_id)');
+                // Muistathan, että olion attribuuttiin pääse syntaksilla $this->attribuutin_nimi
+
+                $query->execute(array('chore_id' => $this->chore_id, 'category_id' => $category_id));
+            }
+        } else {
+            $query = DB::connection()->prepare('INSERT INTO ChoreCategory (chore_id, category_id) VALUES (:chore_id, :category_id)');
+            $query->execute(array('chore_id' => $this->chore_id, 'category_id' => $this->category_id));
+        }
     }
 
-//    public function update() {
-//        $query = DB::connection()->prepare('UPDATE ChoreCategory SET chore_id=:chore_id, category_id=:category_id WHERE id=:id');
-//        $query->execute(array('name' => $this->name, 'person_id' => $this->person_id, 'urgent' => $this->urgent, 'id' => $this->id));
-////        $row = $query->fetch();
-////        $this->id = $row['id'];
-//    }
 
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM ChoreCategory WHERE chore_id=:chore_id');
         $query->execute(array('chore_id' => $this->chore_id));
-//        $row = $query->fetch();
-//        $this->id = $row['id'];
+
+    }
+    
+        public function destroyCategory() {
+        $query = DB::connection()->prepare('DELETE FROM ChoreCategory WHERE category_id=:category_id');
+        $query->execute(array('category_id' => $this->category_id));
+
     }
 
 //    public function validate_name() {
